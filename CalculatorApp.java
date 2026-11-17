@@ -4,8 +4,21 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
-public class SumCalculator extends Application {
-@Override
+public class CalculatorApp extends Application {
+    @Override
+    public void start(Stage primaryStage)
+    {
+        
+
+
+    }
+
+
+
+
+
+}
+/* 
 public void start(Stage primaryStage) {
 // Create two TextFields for input
 TextField num1Field = new TextField();
@@ -16,7 +29,7 @@ num2Field.setPromptText("Enter second number");
 TextField resultField = new TextField();
 resultField.setEditable(false); // Make the result field read-only
 // Create a Button to calculate the sum
-Button calculateButton = new Button("Calculate Sum");
+Button calculateButton = new Button("Calculate The Sum");
 // Add an event handler for the button
 calculateButton.setOnAction(event -> {
 try {
@@ -42,3 +55,4 @@ public static void main(String[] args) {
 launch(args);
 }
 }
+*/
