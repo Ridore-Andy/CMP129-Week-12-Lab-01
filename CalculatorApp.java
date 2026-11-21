@@ -4,18 +4,51 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
-public class CalculatorApp extends Application {
+public class CalculatorApp extends Application 
+{
     @Override
     public void start(Stage primaryStage)
     {
-        
+        //textfields for text
+        TextField numText1 = new TextField();
+        numText1.setPromptText("Enter number");
+        TextField numText2 = new TextField();
+        numText2.setPromptText("Enter number");
+        TextField numResult = new TextField();
+        numResult.setEditable(false);
 
+        //calculate button
+        Button sumButton = new Button("Calculate");
 
+        //calculate button mechanics
+        sumButton.setOnAction(event->
+        {
+            try
+            {
+                double num1 = Double.parseDouble(numText1.getText());
+                double num2 = Double.parseDouble(numText2.getText());
+                numResult.setText(String.valueOf(num1 + num2));
+            } 
+
+            catch (NumberFormatException e) 
+            {
+            // Handle invalid input
+            numResult.setText("Invalid input!");
+            }
+            });
+
+        VBox vbox = new VBox(20, numText1, numText2, sumButton, numResult);
+
+        Scene scene = new Scene(vbox, 400, 400);
+        primaryStage.setScene(scene);
+        primaryStage.setTitle("CalculatorApp");
+        primaryStage.show();
     }
+    
+        public static void main(String[] args) 
+        {launch(args);}
 
-
-
-
+    
 
 }
 /* 
