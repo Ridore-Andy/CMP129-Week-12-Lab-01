@@ -6,94 +6,96 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 public class CalculatorApp extends Application 
 {
-
+    String selectedOperator = "+";
     @Override
     public void start(Stage primaryStage)
     {
-        //textfields for text
+        // TextFields for input and output
         TextField numText1 = new TextField();
-        numText1.setPromptText("Enter number");
-
-        //Add buttons for addition, subraction, mutiplication, and division
+        numText1.setPromptText("Enter first number");
 
         TextField numText2 = new TextField();
-        numText2.setPromptText("Enter number");
+        numText2.setPromptText("Enter second number");
+
         TextField numResult = new TextField();
         numResult.setEditable(false);
+        numResult.setPromptText("Result");
 
-        //calculate button
+        // Buttons for addition, subtraction, multiplication, and division
+        Button addButton = new Button("+");
+        Button subButton = new Button("-");
+        Button mulButton = new Button("*");
+        Button divButton = new Button("/");
+        Button clearButton = new Button("C");
         Button sumButton = new Button("Calculate");
 
-        //calculate button mechanics
-        sumButton.setOnAction(event->
-        {
-            try
-            {
+        // Operator button event handlers
+        addButton.setOnAction(event -> {
+            selectedOperator = "+";
+            numResult.setText("Selected: +");
+        });
+
+        subButton.setOnAction(event -> {
+            selectedOperator = "-";
+            numResult.setText("Selected: -");
+        });
+
+        mulButton.setOnAction(event -> {
+            selectedOperator = "*";
+            numResult.setText("Selected: *");
+        });
+
+        divButton.setOnAction(event -> {
+            selectedOperator = "/";
+            numResult.setText("Selected: /");
+        });
+
+        // Clear button event handler
+        clearButton.setOnAction(event -> {
+            numText1.clear();
+            numText2.clear();
+            numResult.clear();
+            selectedOperator = "+";
+        });
+
+        // Calculate button mechanics
+        sumButton.setOnAction(event -> {
+            try {
                 double num1 = Double.parseDouble(numText1.getText());
                 double num2 = Double.parseDouble(numText2.getText());
-                numResult.setText(String.valueOf(num1 + num2));
+                double result = 0;
+
+                if (selectedOperator.equals("+")) 
+                {result = num1 + num2;} 
+                else if (selectedOperator.equals("-")) 
+                {result = num1 - num2;} 
+                else if (selectedOperator.equals("*")) 
+                {result = num1 * num2;} 
+                else if (selectedOperator.equals("/")) 
+                {
+                    
+                    if (num2 == 0) 
+                    {
+                        numResult.setText("Cannot divide by zero!");
+                        return;
+                    }
+                    result = num1 / num2;
+                }
+                numResult.setText(String.valueOf(result));
             } 
-
+            
             catch (NumberFormatException e) 
-            {
-            // Handle invalid input
-            numResult.setText("Invalid input!");
-            }
-            });
+            {numResult.setText("Invalid input!");}
+        });
 
-        VBox vbox = new VBox(20, numText1, numText2, sumButton, numResult);
+        VBox vbox = new VBox(15, numText1, numText2, addButton, subButton, mulButton, divButton, clearButton, sumButton, numResult);
 
         Scene scene = new Scene(vbox, 400, 400);
         primaryStage.setScene(scene);
         primaryStage.setTitle("CalculatorApp");
         primaryStage.show();
     }
-    
-        public static void main(String[] args) 
-        {launch(args);}
-    }
 
-    
-
-    
-
+    public static void main(String[] args) 
+    {launch(args);}
 }
-/* 
-public void start(Stage primaryStage) {
-// Create two TextFields for input
-TextField num1Field = new TextField();
-num1Field.setPromptText("Enter first number");
-TextField num2Field = new TextField();
-num2Field.setPromptText("Enter second number");
-// Create a TextField to display the result
-TextField resultField = new TextField();
-resultField.setEditable(false); // Make the result field read-only
-// Create a Button to calculate the sum
-Button calculateButton = new Button("Calculate The Sum");
-// Add an event handler for the button
-calculateButton.setOnAction(event -> {
-try {
-// Parse numbers from the text fields
-double num1 = Double.parseDouble(num1Field.getText());
-double num2 = Double.parseDouble(num2Field.getText());
-// Calculate the sum and display it in the result field
-resultField.setText(String.valueOf(num1 + num2));
-} catch (NumberFormatException e) {
-// Handle invalid input
-resultField.setText("Invalid input!");
-}
-});
-// Create a VBox layout and add controls
-VBox vbox = new VBox(10, num1Field, num2Field, calculateButton, resultField);
-// Set up the Scene and Stage
-Scene scene = new Scene(vbox, 300, 200);
-primaryStage.setScene(scene);
-primaryStage.setTitle("Sum Calculator");
-primaryStage.show();
-}
-public static void main(String[] args) {
-launch(args);
-}
-}
-*/
-
