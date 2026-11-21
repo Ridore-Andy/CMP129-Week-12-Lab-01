@@ -6,12 +6,16 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 public class CalculatorApp extends Application 
 {
+
     @Override
     public void start(Stage primaryStage)
     {
         //textfields for text
         TextField numText1 = new TextField();
         numText1.setPromptText("Enter number");
+
+        //Add buttons for addition, subraction, mutiplication, and division
+
         TextField numText2 = new TextField();
         numText2.setPromptText("Enter number");
         TextField numResult = new TextField();
@@ -47,6 +51,9 @@ public class CalculatorApp extends Application
     
         public static void main(String[] args) 
         {launch(args);}
+    }
+
+    
 
     
 
@@ -89,3 +96,4 @@ launch(args);
 }
 }
 */
+
